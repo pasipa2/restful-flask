@@ -61,18 +61,6 @@ class Item(Resource):
         
         return item.json()
 
-        if item is None:
-            try:
-                updated_item.insert()
-            except:
-                return {"message": "An error occurred inserting the item"}, 500
-        else:
-            try:
-                updated_item.update()
-            except:
-                return {"message": "An error occurred updating the item"}, 500
-        return updated_item.json()
-
 class ItemList(Resource):
 
     def get(self):
