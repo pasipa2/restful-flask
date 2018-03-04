@@ -5,10 +5,11 @@ from security import authenticate, identity
 from resources.user import UserRegister
 from resources.item import Item, ItemList
 from resources.store import Store, StoreList
+import os
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
 app.secret_key = '53VMpSQhSg8kJPvJM8TR7WrCgF4RXFKDxv59hzd72zCxBLQgsh'
 api = Api(app)
 
@@ -19,7 +20,6 @@ api.add_resource(Item, '/item/<string:name>')
 api.add_resource(ItemList, '/items')
 api.add_resource(StoreList, '/stores')
 api.add_resource(UserRegister, '/register')
-
 
 if  __name__ == '__main__':
 
